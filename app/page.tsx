@@ -14,6 +14,18 @@ import { HERO_HOME_IMAGE, serviceIllustration } from "@/lib/service-images";
 import { SERVICE_CARD_LINES, SERVICE_CARD_TITLES } from "@/lib/services";
 import { SITE } from "@/lib/site";
 
+function LinkedPhoneText({ text }: { text: string }) {
+  const i = text.indexOf(SITE.phoneDisplay);
+  if (i < 0) return text;
+  return (
+    <>
+      {text.slice(0, i)}
+      <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
+      {text.slice(i + SITE.phoneDisplay.length)}
+    </>
+  );
+}
+
 const HOME_FAQ = [
   {
     question: "Do you pressure wash commercial properties only?",
@@ -51,7 +63,7 @@ export default function HomePage() {
       href: `/${slug}`,
   }));
 
-  const heroLead = `Gum-stained sidewalks, tired awnings, and salt-crusted lots send the wrong message to tenants, shoppers, and inspectors. ${SITE.name} matches pressure, heat, and chemistry to each commercial surface — brick, EIFS, asphalt, fabric, and cladding — with insured crews that respect after-hours rules and certificate requests. From single plazas to multi-city portfolios, one dispatch line handles scope, scheduling, and photo documentation when you need it. Call ${SITE.phoneDisplay} any time; we are ${SITE.hours.toLowerCase()}.`;
+  const heroLead = `Gum-stained sidewalks, tired awnings, and salt-crusted lots send the wrong message to tenants, shoppers, and inspectors. Washpavement matches pressure, heat, and chemistry to each commercial surface — brick, EIFS, asphalt, fabric, and cladding — with insured crews that respect after-hours rules and certificate requests. From single plazas to multi-city portfolios, one dispatch line handles scope, scheduling, and photo documentation when you need it. We are ${SITE.hours.toLowerCase()}.`;
 
   return (
     <>
@@ -82,8 +94,8 @@ export default function HomePage() {
           <p className="lead">Five core services — each with national guides and city scheduling.</p>
         </div>
         <div className="container service-cards-jadoo">
-          {services.map((s, i) => (
-            <article key={s.slug} className={i === 1 ? "svc-card featured" : "svc-card"}>
+          {services.map((s) => (
+            <article key={s.slug} className="svc-card">
               <span className="svc-art">
                 <Image src={s.image} alt="" width={120} height={120} className="svc-art-img" />
               </span>
@@ -183,7 +195,10 @@ export default function HomePage() {
       <section className="subscribe-band">
         <div className="container subscribe-inner">
           <h2>Ready for a cleaner curb appeal?</h2>
-          <p>No forms — call {SITE.phoneDisplay} and talk to dispatch now.</p>
+          <p>
+            No forms — call{" "}
+            <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a> and talk to dispatch now.
+          </p>
           <a className="jadoo-btn-primary" href={`tel:${SITE.phoneTel}`}>
             Call {SITE.phoneDisplay}
           </a>
@@ -196,7 +211,9 @@ export default function HomePage() {
           {HOME_FAQ.map((f) => (
             <div key={f.question}>
               <h3>{f.question}</h3>
-              <p>{f.answer}</p>
+              <p>
+                <LinkedPhoneText text={f.answer} />
+              </p>
             </div>
           ))}
         </div>

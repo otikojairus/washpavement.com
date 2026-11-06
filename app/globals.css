@@ -489,34 +489,17 @@ img {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .svc-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   text-align: center;
   padding: 28px 18px 32px;
   border-radius: var(--radius);
-  transition: box-shadow 0.25s, transform 0.25s;
-}
-
-.svc-card.featured {
-  background: #fff;
-  box-shadow: 0 16px 48px rgba(20, 24, 63, 0.1);
-  transform: translateY(-8px);
-}
-
-.svc-card.featured::before {
-  content: "";
-  position: absolute;
-  left: -12px;
-  bottom: 24px;
-  width: 88px;
-  height: 88px;
-  background: var(--orange);
-  border-radius: 18px 8px 120px 18px;
-  z-index: -1;
-  opacity: 0.35;
 }
 
 .svc-art {
@@ -541,12 +524,27 @@ img {
   font-family: var(--font-body);
   font-size: 1.05rem;
   margin: 0 0 8px;
+  min-height: 2.6em;
+}
+
+.svc-card p {
+  flex: 1;
+  margin: 0 0 16px;
 }
 
 .svc-card a {
   color: var(--orange);
   font-weight: 600;
   font-size: 14px;
+  margin-top: auto;
+}
+
+.faq-home a,
+.subscribe-inner p a {
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Destinations — legacy; cities use .city-index */
